@@ -4,9 +4,10 @@ import buildLoaders from "./buildLoaders";
 import buildPlugins from "./buildPlugins";
 import buildResolves from "./buildResolves";
 import { BuildOptions } from "./types/config";
+import buildDevServer from "./buildDevServer";
 
 const buildWebpackConfig = (options: BuildOptions): webpack.Configuration => {
-  const { paths, mode } = options;
+  const { paths, mode, isDev } = options;
 
   return {
     mode: mode,
@@ -18,9 +19,11 @@ const buildWebpackConfig = (options: BuildOptions): webpack.Configuration => {
     },
     plugins: buildPlugins(options),
     module: {
-      rules: buildLoaders(),
+      rules: buildLoaders(options),
     },
     resolve: buildResolves(),
+    devtool: isDev ? "inline-source-map" : undefined,
+    devServer: buildDevServer(options),
   };
 };
 
