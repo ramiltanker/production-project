@@ -4,8 +4,11 @@ module.exports = {
   semi: true,
   useTabs: false,
   tabWidth: 2,
-  bracketSameLine: true,
-  jsxBracketSameLine: true,
+  bracketSameLine: false,
+  jsxBracketSameLine: false,
   trailingComma: 'none',
-  endOfline: 'lf'
+  endOfline: 'lf',
+  printWidth: 120,
+  proseWrap: 'preserve',
+  arrowParens: 'always'
 };

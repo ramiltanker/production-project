@@ -1,4 +1,11 @@
 {
-  "Тестовый перевод": "Test translate",
+  "Главная": "Main",
+  "О сайте": "About",
+  "Обновить страницу": "Reload page",
+  "Показать": "Show",
+  "Про": "Про",
+  "Пробросить ошибку": "Throw Error",
+  "Произошла непредвиденная ошибка": "An unexpected error has occurred",
+  "Страница не найдена": "Page is not found",
   "Язык": "English"
 }

@@ -7,49 +7,48 @@ module.exports = {
   extends: [
     'plugin:react/recommended',
     'standard-with-typescript',
-    'plugin:i18next/recommended'
+    'plugin:i18next/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended-requiring-type-checking'
   ],
-  overrides: [
-    {
-      files: ['*.ts', '*.tsx'],
-      extends: [
-        'plugin:@typescript-eslint/recommended',
-        'plugin:@typescript-eslint/recommended-requiring-type-checking'
-      ],
-      parser: '@typescript-eslint/parser',
-      parserOptions: {
-        project: ['tsconfig.json'],
-        ecmaFeatures: {
-          jsx: true
-        },
-        ecmaVersion: 'latest',
-        sourceType: 'module'
-      }
-    }
-  ],
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    project: ['tsconfig.json'],
+    ecmaFeatures: {
+      jsx: true
+    },
+    ecmaVersion: 'latest',
+    sourceType: 'module'
+  },
   plugins: ['react', '@typescript-eslint', 'i18next'],
   rules: {
-    'react/jsx-indent': ['error', 2],
-    'react/jsx-indent-props': ['error', 2],
-    indent: ['error', 2],
-    'react/jsx-filename-extension': [
-      2,
-      { extensions: ['.js', '.jsx', '.tsx'] }
-    ],
-    'comma-dangle': 'off',
-    semi: ['error', 'always'],
-    'import/prefer-default-export': 'off',
+    'react/jsx-indent': [2, 2],
+    'react/jsx-indent-props': [2, 2],
+    indent: 'off',
+    semi: 'off',
     '@typescript-eslint/semi': [2, 'always'],
+    'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.tsx'] }],
+    'import/no-unresolved': 'off',
+    'import/prefer-default-export': 'off',
     'no-unused-vars': 'warn',
-    '@typescript-eslint/no-unused-vars': 'warn',
+    'react/require-default-props': 'off',
     'react/react-in-jsx-scope': 'off',
-    '@typescript-eslint/explicit-function-return-type': 'off',
     'react/jsx-props-no-spreading': 'warn',
     'react/function-component-definition': 'off',
     'no-shadow': 'off',
     'import/extensions': 'off',
     'import/no-extraneous-dependencies': 'off',
     'no-underscore-dangle': 'off',
+    'i18next/no-literal-string': ['error', { markupOnly: true }],
+    'max-len': ['error', { ignoreComments: true }],
+    '@typescript-eslint/space-before-function-paren': [
+      'error',
+      {
+        anonymous: 'always',
+        named: 'never',
+        asyncArrow: 'always'
+      }
+    ],
     '@typescript-eslint/member-delimiter-style': [
       'error',
       {
@@ -63,13 +62,22 @@ module.exports = {
         }
       }
     ],
-    '@typescript-eslint/naming-convention': 'off',
     '@typescript-eslint/strict-boolean-expressions': 'off',
-    '@typescript-eslint/no-floating-promises': 'off',
     '@typescript-eslint/no-empty-interface': 'warn',
-    'i18next/no-literal-string': ['error', { markupOnly: true }]
+    '@typescript-eslint/explicit-function-return-type': 'warn',
+    '@typescript-eslint/no-floating-promises': 'off',
+    '@typescript-eslint/naming-convention': 'off',
+    'max-len': [2, { ignoreComments: true, code: 120 }]
   },
   globals: {
     __IS_DEV__: true
-  }
+  },
+  overrides: [
+    {
+      files: ['**/src/**/*.test.{ts,tsx}'],
+      rules: {
+        'i18next/no-literal=string': 'off'
+      }
+    }
+  ]
 };

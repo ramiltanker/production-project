@@ -33,11 +33,14 @@
     // import React from 'react';
     "allowSyntheticDefaultImports": true,
     // Когда strictNullChecks имеет значение false, null и undefined фактически игнорируются языком. Это может привести к неожиданным ошибкам во время выполнения.
-    "strictNullChecks": true
+    "strictNullChecks": false,
+    "strict": false
   },
   "ts-node": {
     "compilerOptions": {
       "module": "CommonJS"
     }
-  }
+  },
+  "include": ["**/*.ts", "**/*.tsx", ".eslintrc.js", "./config/jest/setupTests.ts"],
+  "exclude": ["node_modules"]
 }
