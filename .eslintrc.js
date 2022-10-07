@@ -9,7 +9,8 @@ module.exports = {
     'standard-with-typescript',
     'plugin:i18next/recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:@typescript-eslint/recommended-requiring-type-checking'
+    'plugin:@typescript-eslint/recommended-requiring-type-checking',
+    'plugin:storybook/recommended'
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -27,7 +28,12 @@ module.exports = {
     indent: 'off',
     semi: 'off',
     '@typescript-eslint/semi': [2, 'always'],
-    'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.tsx'] }],
+    'react/jsx-filename-extension': [
+      2,
+      {
+        extensions: ['.js', '.jsx', '.tsx']
+      }
+    ],
     'import/no-unresolved': 'off',
     'import/prefer-default-export': 'off',
     'no-unused-vars': 'warn',
@@ -39,8 +45,19 @@ module.exports = {
     'import/extensions': 'off',
     'import/no-extraneous-dependencies': 'off',
     'no-underscore-dangle': 'off',
-    'i18next/no-literal-string': ['error', { markupOnly: true }],
-    'max-len': ['error', { ignoreComments: true }],
+    'i18next/no-literal-string': [
+      'error',
+      {
+        markupOnly: true,
+        ignoreAttribute: ['data-testid', 'to']
+      }
+    ],
+    'max-len': [
+      'error',
+      {
+        ignoreComments: true
+      }
+    ],
     '@typescript-eslint/space-before-function-paren': [
       'error',
       {
@@ -67,7 +84,14 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'warn',
     '@typescript-eslint/no-floating-promises': 'off',
     '@typescript-eslint/naming-convention': 'off',
-    'max-len': [2, { ignoreComments: true, code: 120 }]
+    '@typescript-eslint/consistent-type-assertions': 'as',
+    'max-len': [
+      2,
+      {
+        ignoreComments: true,
+        code: 120
+      }
+    ]
   },
   globals: {
     __IS_DEV__: true

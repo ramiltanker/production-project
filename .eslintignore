@@ -9,3 +9,5 @@ build
 .prettier.config.js
 
 tsconfig.json
+
+config/storybook

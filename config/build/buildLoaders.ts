@@ -1,6 +1,7 @@
 import webpack from 'webpack';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { BuildOptions } from './types/config';
+import { buildCssLoader } from './loaders/buildCssLoader';
+import { buildSvgLoader } from './loaders/buildSvgLoader';
 
 const buildLoaders = ({ isDev }: BuildOptions): webpack.RuleSetRule[] => {
   const typescriptLoader = {
@@ -9,29 +10,9 @@ const buildLoaders = ({ isDev }: BuildOptions): webpack.RuleSetRule[] => {
     exclude: /node_modules/
   };
 
-  const cssLoader = {
-    test: /\.s[ac]ss$/i,
-    use: [
-      isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
-      {
-        loader: 'css-loader',
-        options: {
-          modules: {
-            auto: (path: string) => Boolean(path.includes('.module.')),
-            localIdentName: isDev
-              ? '[path][name]__[local]--[hash:base64:5]'
-              : '[hash:base64:8]'
-          }
-        }
-      },
-      'sass-loader'
-    ]
-  };
+  const cssLoader = buildCssLoader(isDev);
 
-  const svgLoader = {
-    test: /\.svg$/,
-    use: ['@svgr/webpack']
-  };
+  const svgLoader = buildSvgLoader();
 
   const fileLoader = {
     test: /\.(png|jpe?g|gif)$/i,
@@ -49,12 +30,7 @@ const buildLoaders = ({ isDev }: BuildOptions): webpack.RuleSetRule[] => {
       loader: 'babel-loader',
       options: {
         presets: ['@babel/preset-env'],
-        plugins: [
-          [
-            'i18next-extract',
-            { locales: ['ru', 'en'], keyAsDefaultValue: true }
-          ]
-        ]
+        plugins: [['i18next-extract', { locales: ['ru', 'en'], keyAsDefaultValue: true }]]
       }
     }
   };
