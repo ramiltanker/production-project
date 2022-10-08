@@ -91,7 +91,8 @@ module.exports = {
         ignoreComments: true,
         code: 120
       }
-    ]
+    ],
+    'react/display-name': 'off'
   },
   globals: {
     __IS_DEV__: true
