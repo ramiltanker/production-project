@@ -41,6 +41,6 @@
       "module": "CommonJS"
     }
   },
-  "include": ["**/*.ts", "**/*.tsx", ".eslintrc.js", "./config/jest/setupTests.ts"],
+  "include": ["**/*.ts", "**/*.tsx", ".eslintrc.js", "prettier.config.js", "./config/jest/setupTests.ts"],
   "exclude": ["node_modules"]
 }
