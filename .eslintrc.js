@@ -84,7 +84,7 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'warn',
     '@typescript-eslint/no-floating-promises': 'off',
     '@typescript-eslint/naming-convention': 'off',
-    '@typescript-eslint/consistent-type-assertions': 'as',
+    '@typescript-eslint/consistent-type-assertions': [2, 'as'],
     'max-len': [
       2,
       {
