@@ -84,14 +84,15 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'warn',
     '@typescript-eslint/no-floating-promises': 'off',
     '@typescript-eslint/naming-convention': 'off',
-    '@typescript-eslint/consistent-type-assertions': 'as',
+    '@typescript-eslint/consistent-type-assertions': [2, { assertionStyle: 'as' }],
     'max-len': [
       2,
       {
         ignoreComments: true,
         code: 120
       }
-    ]
+    ],
+    'react/display-name': 'off'
   },
   globals: {
     __IS_DEV__: true
