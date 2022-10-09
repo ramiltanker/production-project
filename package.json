@@ -91,6 +91,9 @@
     "ts-node": "^10.5.0"
   },
   "loki": {
+    "looks-same": {
+      "ignoreCaret": true
+    },
     "configurations": {
       "chrome.laptop": {
         "target": "chrome.app",
