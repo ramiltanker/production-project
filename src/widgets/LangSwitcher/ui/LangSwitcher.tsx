@@ -1,13 +1,14 @@
 import { classNames } from 'shared/lib/classNames/classNames';
 import { useTranslation } from 'react-i18next';
 import React from 'react';
-import { Button, ThemeButton } from 'shared/ui/Button/Button';
+import { Button, ButtonTheme } from 'shared/ui/Button/Button';
 
 interface LangSwitcherProps {
   className?: string;
+  short?: boolean;
 }
 
-export const LangSwitcher = ({ className }: LangSwitcherProps) => {
+export const LangSwitcher = ({ className, short }: LangSwitcherProps) => {
   const { t, i18n } = useTranslation();
 
   // eslint-disable-next-line @typescript-eslint/require-await
@@ -17,8 +18,8 @@ export const LangSwitcher = ({ className }: LangSwitcherProps) => {
 
   return (
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    <Button className={classNames('', {}, [className])} theme={ThemeButton.CLEAR} onClick={toggle}>
-      {t('Язык')}
+    <Button className={classNames('', {}, [className])} theme={ButtonTheme.CLEAR} onClick={toggle}>
+      {t(short ? 'Короткий язык' : 'Язык')}
     </Button>
   );
 };

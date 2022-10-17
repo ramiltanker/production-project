@@ -6,9 +6,6 @@
     transition: width 300ms ease;
 }
 
-.collapsed {
-    width: var(--sidebar-width-collapsed);
-}
 
 .switchers {
     position: absolute;
@@ -19,4 +16,52 @@
 
 .langSwitcher {
     margin-left: 20px;
+}
+
+.collapsedBtn {
+    position: absolute;
+    right: -40px;
+    bottom: 40px;
+}
+
+
+.items {
+    margin-top: 20px;
+    margin-left: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.link {
+    opacity: 1;
+    margin-left: 10px;
+}
+
+.icon {
+    fill: var(--inverted-primary-color);
+}
+
+.collapsed {
+    width: var(--sidebar-width-collapsed);
+
+    .switchers {
+        width: 100%;
+        flex-direction: column;
+    }
+    
+    .langSwitcher {
+        margin-left: 0;
+    }
+
+    .link {
+        opacity: 0;
+        transition: opacity 200ms ease;
+        width: 0;
+    }
 }

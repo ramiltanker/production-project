@@ -29,7 +29,7 @@ Primary.args = {
 export const Secondary = Template.bind({});
 Secondary.args = {
   children: 'Text',
-  theme: AppLinkTheme.SECONDARY
+  theme: AppLinkTheme.PRIMARY_INVERTED
 };
 
 export const Red = Template.bind({});
@@ -48,7 +48,7 @@ PrimaryDark.decorators = [ThemeDecorator(Theme.DARK)];
 export const SecondaryDark = Template.bind({});
 SecondaryDark.args = {
   children: 'Text',
-  theme: AppLinkTheme.SECONDARY
+  theme: AppLinkTheme.PRIMARY_INVERTED
 };
 SecondaryDark.decorators = [ThemeDecorator(Theme.DARK)];
 
