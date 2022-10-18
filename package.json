@@ -84,6 +84,7 @@
     "@babel/core": "^7.19.1",
     "@babel/preset-env": "^7.19.1",
     "@svgr/webpack": "6.2.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "file-loader": "6.2.0",
     "i18next": "21.6.11",
     "i18next-browser-languagedetector": "^6.1.3",
