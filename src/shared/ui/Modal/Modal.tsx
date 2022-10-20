@@ -30,8 +30,7 @@ const Modal: FC<ModalProps> = ({ className, children, isOpen, onClose }) => {
 
   const mods: Record<string, boolean> = {
     [styles.opened]: isOpen,
-    [styles.isClosing]: isClosing,
-    [styles[theme]]: true
+    [styles.isClosing]: isClosing
   };
 
   const handleContentClick = (e: React.MouseEvent) => {
