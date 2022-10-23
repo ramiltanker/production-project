@@ -5,6 +5,7 @@ import { AppLink, AppLinkTheme } from 'shared/ui/AppLink/AppLink';
 import { useTranslation } from 'react-i18next';
 import { Button, ButtonTheme } from 'shared/ui/Button/Button';
 import { Modal } from 'shared/ui/Modal/Modal';
+import { LoginModal } from 'features/AuthByUsername';
 
 interface NavbarProps {}
 
@@ -12,16 +13,20 @@ const Navbar: FC<NavbarProps> = () => {
   const { t } = useTranslation();
   const [isAuthModal, setIsAuthModal] = useState<boolean>(false);
 
-  const handleToggleAuthModal = useCallback(() => {
-    setIsAuthModal((prev) => !prev);
+  const handleCloseAuthModal = useCallback(() => {
+    setIsAuthModal(false);
+  }, []);
+
+  const handleOpenAuthModal = useCallback(() => {
+    setIsAuthModal(true);
   }, []);
 
   return (
     <div className={classNames(styles.navbar)}>
-      <Button theme={ButtonTheme.CLEAR_INVERTED} className={classNames(styles.links)} onClick={handleToggleAuthModal}>
+      <Button theme={ButtonTheme.CLEAR_INVERTED} className={classNames(styles.links)} onClick={handleOpenAuthModal}>
         {t('Войти')}
       </Button>
-      <Modal isOpen={isAuthModal} onClose={handleToggleAuthModal}></Modal>
+      <LoginModal isOpen={isAuthModal} onClose={handleCloseAuthModal} />
     </div>
   );
 };
