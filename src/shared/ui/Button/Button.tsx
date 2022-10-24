@@ -21,17 +21,27 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   theme?: ButtonTheme;
   square?: boolean;
   size?: ButtonSize;
+  disabled?: boolean;
 }
 
-const Button: FC<ButtonProps> = ({ className = '', children, theme = '', square = false, size, ...buttonProps }) => {
+const Button: FC<ButtonProps> = ({
+  className = '',
+  children,
+  theme = '',
+  square = false,
+  size,
+  disabled,
+  ...buttonProps
+}) => {
   const mods = {
     [styles[theme]]: true,
     [styles.square]: square,
-    [styles[size]]: true
+    [styles[size]]: true,
+    [styles.disabled]: disabled
   };
 
   return (
-    <button type="button" className={classNames(styles.button, mods, [className])} {...buttonProps}>
+    <button type="button" className={classNames(styles.button, mods, [className])} disabled={disabled} {...buttonProps}>
       {children}
     </button>
   );

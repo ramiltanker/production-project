@@ -12,5 +12,8 @@
   "Войти": "Log in",
   "Значение = ": "Value = ",
   "Введите пароль": "Enter the password",
-  "Введите имя пользователя": "Enter the username"
+  "Введите имя пользователя": "Enter the username",
+  "Форма авторизации": "Authorization",
+  "Вы ввели неверное имя пользователя или пароль": "You have entered an incorrect username or password",
+  "Выйти": "Log out"
 }
