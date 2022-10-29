@@ -44,7 +44,7 @@ const Navbar: FC<NavbarProps> = () => {
       <Button theme={ButtonTheme.CLEAR_INVERTED} className={classNames(styles.links)} onClick={handleOpenAuthModal}>
         {t('Войти')}
       </Button>
-      <LoginModal isOpen={isAuthModal} onClose={handleCloseAuthModal} />
+      {isAuthModal && <LoginModal isOpen={isAuthModal} onClose={handleCloseAuthModal} />}
     </div>
   );
 };

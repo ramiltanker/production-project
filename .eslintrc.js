@@ -89,7 +89,8 @@ module.exports = {
       2,
       {
         ignoreComments: true,
-        code: 120
+        code: 120,
+        ignorePattern: '^import .*'
       }
     ],
     'react/display-name': 'off',

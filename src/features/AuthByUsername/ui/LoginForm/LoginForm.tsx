@@ -1,23 +1,37 @@
-import { FC, memo, useCallback } from 'react';
+import { FC, memo, useCallback, useEffect } from 'react';
 import styles from './LoginForm.module.scss';
 import { useTranslation } from 'react-i18next';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { Button, ButtonTheme } from 'shared/ui/Button/Button';
 import { Input } from 'shared/ui/Input/Input';
-import { useDispatch, useSelector } from 'react-redux';
-import { loginActions } from 'features/AuthByUsername/model/slice/loginSlice';
-import { getLoginState } from 'features/AuthByUsername/model/selectors/getLoginState/getLoginState';
+import { useDispatch, useSelector, useStore } from 'react-redux';
+import { loginActions, loginReducer } from 'features/AuthByUsername/model/slice/loginSlice';
 import { loginByUsername } from 'features/AuthByUsername/model/services/loginByUsername/loginByUsername';
 import { Text, TextTheme } from 'shared/ui/Text/Text';
+import { ReduxStoreWithManager } from 'app/providers/StoreProvider';
+import { getLoginStateUsername } from 'features/AuthByUsername/model/selectors/getLoginStateUsername/getLoginStateUsername';
+import { getLoginStatePassword } from 'features/AuthByUsername/model/selectors/getLoginStatePassword/getLoginStatePassword';
+import { getLoginStateIsLoading } from 'features/AuthByUsername/model/selectors/getLoginStateIsLoading/getLoginStateIsLoading';
+import { getLoginStateError } from 'features/AuthByUsername/model/selectors/getLoginStateError/getLoginStateError';
+import { DynamicModuleLoader, ReducersList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 
-interface LoginFormProps {
+export interface LoginFormProps {
   className?: string;
 }
 
+const initialReducers: ReducersList = {
+  loginForm: loginReducer
+};
+
 const LoginForm = memo(({ className }: LoginFormProps) => {
   const { t } = useTranslation();
+
   const dispatch = useDispatch();
-  const { username, password, isLoading, error } = useSelector(getLoginState);
+
+  const username = useSelector(getLoginStateUsername);
+  const password = useSelector(getLoginStatePassword);
+  const isLoading = useSelector(getLoginStateIsLoading);
+  const error = useSelector(getLoginStateError);
 
   const onChangeUsername = useCallback(
     (value: string) => {
@@ -38,22 +52,29 @@ const LoginForm = memo(({ className }: LoginFormProps) => {
   }, [dispatch, password, username]);
 
   return (
-    <div className={classNames(styles.loginForm, {}, [className])}>
-      <Text title={t('Форма авторизации')} />
-      {error && <Text text={t('Вы ввели неверное имя пользователя или пароль')} theme={TextTheme.ERROR} />}
-      <Input
-        placeholder={t('Введите имя пользователя')}
-        autofocus={true}
-        className={styles.input}
-        onChange={onChangeUsername}
-        value={username}
-      />
-      <Input placeholder={t('Введите пароль')} className={styles.input} onChange={onChangePassword} value={password} />
-      <Button theme={ButtonTheme.OUTLINE} className={styles.loginBtn} onClick={onLoginClick} disabled={isLoading}>
-        {t('Войти')}
-      </Button>
-    </div>
+    <DynamicModuleLoader removeAfterUnmount reducers={initialReducers}>
+      <div className={classNames(styles.loginForm, {}, [className])}>
+        <Text title={t('Форма авторизации')} />
+        {error && <Text text={t('Вы ввели неверное имя пользователя или пароль')} theme={TextTheme.ERROR} />}
+        <Input
+          placeholder={t('Введите имя пользователя')}
+          autofocus={true}
+          className={styles.input}
+          onChange={onChangeUsername}
+          value={username}
+        />
+        <Input
+          placeholder={t('Введите пароль')}
+          className={styles.input}
+          onChange={onChangePassword}
+          value={password}
+        />
+        <Button theme={ButtonTheme.OUTLINE} className={styles.loginBtn} onClick={onLoginClick} disabled={isLoading}>
+          {t('Войти')}
+        </Button>
+      </div>
+    </DynamicModuleLoader>
   );
 });
 
-export { LoginForm };
+export default LoginForm;
