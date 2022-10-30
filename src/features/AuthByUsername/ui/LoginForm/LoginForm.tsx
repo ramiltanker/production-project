@@ -14,19 +14,22 @@ import { getLoginStatePassword } from 'features/AuthByUsername/model/selectors/g
 import { getLoginStateIsLoading } from 'features/AuthByUsername/model/selectors/getLoginStateIsLoading/getLoginStateIsLoading';
 import { getLoginStateError } from 'features/AuthByUsername/model/selectors/getLoginStateError/getLoginStateError';
 import { DynamicModuleLoader, ReducersList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { wrapAsyncFunction } from 'shared/lib/wrappedFunc/intentionalyFloatingPromiseReturn/intentionalyFloatingPromiseReturn';
 
 export interface LoginFormProps {
   className?: string;
+  onSuccess: () => void;
 }
 
 const initialReducers: ReducersList = {
   loginForm: loginReducer
 };
 
-const LoginForm = memo(({ className }: LoginFormProps) => {
+const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
   const { t } = useTranslation();
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const username = useSelector(getLoginStateUsername);
   const password = useSelector(getLoginStatePassword);
@@ -47,9 +50,12 @@ const LoginForm = memo(({ className }: LoginFormProps) => {
     [dispatch]
   );
 
-  const onLoginClick = useCallback(() => {
-    dispatch(loginByUsername({ username, password }));
-  }, [dispatch, password, username]);
+  const onLoginClick = useCallback(async () => {
+    const result = await dispatch(loginByUsername({ username, password }));
+    if (result.meta.requestStatus === 'fulfilled') {
+      onSuccess();
+    }
+  }, [onSuccess, dispatch, password, username]);
 
   return (
     <DynamicModuleLoader removeAfterUnmount reducers={initialReducers}>
@@ -69,7 +75,12 @@ const LoginForm = memo(({ className }: LoginFormProps) => {
           onChange={onChangePassword}
           value={password}
         />
-        <Button theme={ButtonTheme.OUTLINE} className={styles.loginBtn} onClick={onLoginClick} disabled={isLoading}>
+        <Button
+          theme={ButtonTheme.OUTLINE}
+          className={styles.loginBtn}
+          onClick={wrapAsyncFunction(onLoginClick)}
+          disabled={isLoading}
+        >
           {t('Войти')}
         </Button>
       </div>

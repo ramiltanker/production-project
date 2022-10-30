@@ -1,4 +1,4 @@
-import { FC, useCallback, useState } from 'react';
+import { FC, memo, useCallback, useState } from 'react';
 import styles from './Navbar.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { AppLink, AppLinkTheme } from 'shared/ui/AppLink/AppLink';
@@ -11,7 +11,7 @@ import { getUserAuthData, userActions } from 'entities/User';
 
 interface NavbarProps {}
 
-const Navbar: FC<NavbarProps> = () => {
+const Navbar: FC<NavbarProps> = memo(() => {
   const { t } = useTranslation();
   const [isAuthModal, setIsAuthModal] = useState<boolean>(false);
   const userAuthData = useSelector(getUserAuthData);
@@ -47,6 +47,6 @@ const Navbar: FC<NavbarProps> = () => {
       {isAuthModal && <LoginModal isOpen={isAuthModal} onClose={handleCloseAuthModal} />}
     </div>
   );
-};
+});
 
 export { Navbar };

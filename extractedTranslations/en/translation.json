@@ -1,5 +1,11 @@
 {
   "": "",
+  "$item": {
+    "text": "text"
+  },
+  "item": {
+    "text": "text"
+  },
   "Введите ": "Введите ",
   "Введите имя пользователя": "Enter the username",
   "Введите пароль": "Enter the password",

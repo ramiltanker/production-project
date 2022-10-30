@@ -12,5 +12,14 @@
     }
   ],
   "comments": [{ "id": "1", "body": "some comment", "postId": "1" }],
-  "profile": { "name": "typicode" }
+  "profile": {
+    "firstname": "Ramil",
+    "lastname": "Ashrafulin",
+    "age": 19,
+    "currency": "RUB",
+    "country": "Russia",
+    "city": "Moscow",
+    "username": "admin",
+    "avatar": "https://img.championat.com/i/o/m/16412038301833088240.jpg"
+  }
 }

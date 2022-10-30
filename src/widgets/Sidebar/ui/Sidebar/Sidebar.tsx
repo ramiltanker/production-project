@@ -1,23 +1,18 @@
-import { FC, useState } from 'react';
+import { FC, memo, useState } from 'react';
 import styles from './Sidebar.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { ThemeSwitcher } from 'widgets/ThemeSwitcher';
 import { LangSwitcher } from 'widgets/LangSwitcher';
-import { useTranslation } from 'react-i18next';
 import { Button, ButtonSize, ButtonTheme } from 'shared/ui/Button/Button';
-import { AppLink, AppLinkTheme } from 'shared/ui/AppLink/AppLink';
-import { RoutePath } from 'shared/config/routeConfig/routeConfig';
-import AboutIcon from '../../../../shared/assets/icons/about.svg';
-import MainIcon from '../../../../shared/assets/icons/main.svg';
+import { SidebarItemsList } from 'widgets/Sidebar/model/types/items';
+import { SidebarItem } from '../SidebarItem/SidebarItem';
 
 interface SidebarProps {
   className?: string;
 }
 
-const Sidebar: FC<SidebarProps> = ({ className = '' }) => {
+const Sidebar = memo(({ className = '' }: SidebarProps) => {
   const [collapsed, setCollapsed] = useState<boolean>(false);
-
-  const { t } = useTranslation();
 
   const onToggle = () => {
     setCollapsed((prev) => !prev);
@@ -36,14 +31,9 @@ const Sidebar: FC<SidebarProps> = ({ className = '' }) => {
         {collapsed ? '>' : '<'}
       </Button>
       <div className={styles.items}>
-        <AppLink to={RoutePath.main} className={styles.item} theme={AppLinkTheme.PRIMARY_INVERTED}>
-          <MainIcon className={styles.icon} />
-          <span className={styles.link}>{t('Главная')}</span>
-        </AppLink>
-        <AppLink to={RoutePath.about} className={styles.item} theme={AppLinkTheme.PRIMARY_INVERTED}>
-          <AboutIcon className={styles.icon} />
-          <span className={styles.link}>{t('О сайте')}</span>
-        </AppLink>
+        {SidebarItemsList.map((item) => {
+          return <SidebarItem item={item} key={item.path} collapsed={collapsed} />;
+        })}
       </div>
       <div className={styles.switchers}>
         <ThemeSwitcher />
@@ -51,6 +41,6 @@ const Sidebar: FC<SidebarProps> = ({ className = '' }) => {
       </div>
     </div>
   );
-};
+});
 
 export { Sidebar };
