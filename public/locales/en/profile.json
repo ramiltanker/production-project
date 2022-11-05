@@ -1,0 +1,17 @@
+{
+  "Профиль": "Profile",
+  "Редактировать": "Edit",
+  "Ваше имя": "Your name",
+  "Ваша фамилия": "Your lastname",
+  "Произошла ошибка при загрузки профиля": "An error occurred while loading the profile",
+  "Попробуйте обновить страницу": "Try refreshing the page",
+  "Имя пользователя": "Username",
+  "Ваш возраст": "Age",
+  "Город": "City",
+  "Страна": "Country",
+  "Некорректный возраст": "Incorrect age",
+  "Некорректная страна": "Incorrect country",
+  "Имя и фамилия обязательны": "Firstname and lastname is required",
+  "Данные не указаны": "No data",
+  "Серверная ошибка при сохранении": "Server error while saving data"
+}

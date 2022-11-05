@@ -53,6 +53,6 @@ OnlyTitleDark.decorators = [ThemeDecorator(Theme.DARK)];
 
 export const OnlyTextDark = Template.bind({});
 OnlyTextDark.args = {
-  Text: 'ONLY TEXT'
+  text: 'ONLY TEXT'
 };
 OnlyTextDark.decorators = [ThemeDecorator(Theme.DARK)];

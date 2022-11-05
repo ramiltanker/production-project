@@ -1,8 +1,20 @@
 {
   "posts": [
-    { "id": "1", "title": "json-server", "author": "typicode" },
-    { "id": "2", "title": "json-server123", "author": "typicode123" },
-    { "id": "3", "title": "json-server0000", "author": "typicode0000" }
+    {
+      "id": "1",
+      "title": "json-server",
+      "author": "typicode"
+    },
+    {
+      "id": "2",
+      "title": "json-server123",
+      "author": "typicode123"
+    },
+    {
+      "id": "3",
+      "title": "json-server0000",
+      "author": "typicode0000"
+    }
   ],
   "users": [
     {
@@ -11,10 +23,16 @@
       "password": "123"
     }
   ],
-  "comments": [{ "id": "1", "body": "some comment", "postId": "1" }],
+  "comments": [
+    {
+      "id": "1",
+      "body": "some comment",
+      "postId": "1"
+    }
+  ],
   "profile": {
-    "firstname": "Ramil",
-    "lastname": "Ashrafulin",
+    "firstname": "Ramil123",
+    "lastname": "Ashrafulin123",
     "age": 19,
     "currency": "RUB",
     "country": "Russia",

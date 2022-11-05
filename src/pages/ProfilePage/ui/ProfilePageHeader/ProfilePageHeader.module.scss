@@ -1,0 +1,15 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    .buttons {
+        margin-left: auto;
+    }
+
+    .editBtn {
+        &:not(:last-child) {
+            margin-right: 10px;
+        }
+    }
+}

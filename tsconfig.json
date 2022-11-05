@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "strict": true,
     "outDir": "./dist/",
     // Подсвечивает все места где не указан тип
     // Однако это не означает, что теперь вовсе нельзя использовать any.
@@ -31,16 +32,22 @@
     // import * as React from 'react';
     // можно писать такой
     // import React from 'react';
-    "allowSyntheticDefaultImports": true,
+    "allowSyntheticDefaultImports": true
     // Когда strictNullChecks имеет значение false, null и undefined фактически игнорируются языком. Это может привести к неожиданным ошибкам во время выполнения.
-    "strictNullChecks": false,
-    "strict": false
   },
   "ts-node": {
     "compilerOptions": {
       "module": "CommonJS"
     }
   },
-  "include": ["**/*.ts", "**/*.tsx", ".eslintrc.js", "prettier.config.js", "./config/jest/setupTests.ts"],
+  "include": [
+    "./src/**/*.ts",
+    "./src/**/*.tsx",
+    ".eslintrc.js",
+    "prettier.config.js",
+    "./config/jest/*.ts",
+    "./config/jest/*.tsx",
+    "./webpack.config.ts"
+  ],
   "exclude": ["node_modules"]
 }

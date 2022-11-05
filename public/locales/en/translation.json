@@ -15,5 +15,8 @@
   "Введите имя пользователя": "Enter the username",
   "Форма авторизации": "Authorization",
   "Вы ввели неверное имя пользователя или пароль": "You have entered an incorrect username or password",
-  "Выйти": "Log out"
+  "Выйти": "Log out",
+  "Отменить": "Cancel",
+  "Сохранить": "Save",
+  "Валюта": "Currency"
 }
