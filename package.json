@@ -67,9 +67,10 @@
   "scripts": {
     "start": "webpack serve --env port=3000",
     "start:dev:server": "node ./json-server/index.js",
+    "start:dev": "concurrently \"npm run start\" \"npm run start:dev:server\"",
     "build:prod": "webpack --env mode=production",
     "build:dev": "webpack --env mode=development",
-    "lint:ts": "eslint --quiet \"**/*.{ts,tsx}\"",
+    "lint:ts": "eslint \"**/*.{ts,tsx}\"",
     "lint:ts:fix": "eslint \"**/*.{ts,tsx}\" --fix",
     "lint:css": "npx stylelint \"**/*.scss\"",
     "lint:css:fix": "npx stylelint \"**/*.scss\" --fix",
