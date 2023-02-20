@@ -4,23 +4,21 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator/ThemeDecorator';
-import { Theme } from 'app/providers/ThemeProvider';
-import ArticleDetailsPage from './ArticleDetailsPage';
-import { Article } from 'entities/Article';
-import { ArticleType, ArticleBlockType } from 'entities/Article/model/types/article';
+import { ArticleListItem } from './ArticleListItem';
+import { Article, ArticleView } from 'entities/Article/model/types/article';
 
 export default {
-  title: 'pages/About',
-  component: ArticleDetailsPage,
+  title: 'entities/Article/ArticleListItem',
+  component: ArticleListItem,
   argTypes: {
     backgroundColor: { control: 'color' }
+  },
+  args: {
+    to: '/'
   }
-} as ComponentMeta<typeof ArticleDetailsPage>;
+} as ComponentMeta<typeof ArticleListItem>;
 
-const Template: ComponentStory<typeof ArticleDetailsPage> = () => <ArticleDetailsPage />;
-
-const article: Article = {
+const article = {
   id: '1',
   title: 'Javascript news',
   subtitle: 'Что нового в JS за 2022 год?',
@@ -29,13 +27,14 @@ const article: Article = {
   createdAt: '26.02.2022',
   user: {
     id: '1',
-    username: 'Ramil'
+    username: 'Ramil',
+    avatar: 'https://img.championat.com/i/o/m/16412038301833088240.jpg'
   },
-  type: [ArticleType.IT],
+  type: ['IT'],
   blocks: [
     {
       id: '1',
-      type: ArticleBlockType.TEXT,
+      type: 'TEXT',
       title: 'Заголовок этого блока',
       paragraphs: [
         'Программа, которую по традиции называют «Hello, world!», очень проста. Она выводит куда-либо фразу «Hello, world!», или другую подобную, средствами некоего языка.',
@@ -45,12 +44,12 @@ const article: Article = {
     },
     {
       id: '4',
-      type: ArticleBlockType.CODE,
+      type: 'CODE',
       code: '<!DOCTYPE html>\n<html>\n  <body>\n    <p id="hello"></p>\n\n    <script>\n      document.getElementById("hello").innerHTML = "Hello, world!";\n    </script>\n  </body>\n</html>;'
     },
     {
       id: '5',
-      type: ArticleBlockType.TEXT,
+      type: 'TEXT',
       title: 'Заголовок этого блока',
       paragraphs: [
         'Программа, которую по традиции называют «Hello, world!», очень проста. Она выводит куда-либо фразу «Hello, world!», или другую подобную, средствами некоего языка.',
@@ -59,18 +58,18 @@ const article: Article = {
     },
     {
       id: '2',
-      type: ArticleBlockType.IMAGE,
+      type: 'IMAGE',
       src: 'https://hsto.org/r/w1560/getpro/habr/post_images/d56/a02/ffc/d56a02ffc62949b42904ca00c63d8cc1.png',
       title: 'Рисунок 1 - скриншот сайта'
     },
     {
       id: '3',
-      type: ArticleBlockType.CODE,
+      type: 'CODE',
       code: "const path = require('path');\n\nconst server = jsonServer.create();\n\nconst router = jsonServer.router(path.resolve(__dirname, 'db.json'));\n\nserver.use(jsonServer.defaults({}));\nserver.use(jsonServer.bodyParser);"
     },
     {
       id: '7',
-      type: ArticleBlockType.TEXT,
+      type: 'TEXT',
       title: 'Заголовок этого блока',
       paragraphs: [
         'JavaScript — это язык, программы на котором можно выполнять в разных средах. В нашем случае речь идёт о браузерах и о серверной платформе Node.js. Если до сих пор вы не написали ни строчки кода на JS и читаете этот текст в браузере, на настольном компьютере, это значит, что вы буквально в считанных секундах от своей первой JavaScript-программы.',
@@ -79,25 +78,31 @@ const article: Article = {
     },
     {
       id: '8',
-      type: ArticleBlockType.IMAGE,
+      type: 'IMAGE',
       src: 'https://hsto.org/r/w1560/getpro/habr/post_images/d56/a02/ffc/d56a02ffc62949b42904ca00c63d8cc1.png',
       title: 'Рисунок 1 - скриншот сайта'
     },
     {
       id: '9',
-      type: ArticleBlockType.TEXT,
+      type: 'TEXT',
       title: 'Заголовок этого блока',
       paragraphs: [
         'JavaScript — это язык, программы на котором можно выполнять в разных средах. В нашем случае речь идёт о браузерах и о серверной платформе Node.js. Если до сих пор вы не написали ни строчки кода на JS и читаете этот текст в браузере, на настольном компьютере, это значит, что вы буквально в считанных секундах от своей первой JavaScript-программы.'
       ]
     }
   ]
+} as Article;
+
+const Template: ComponentStory<typeof ArticleListItem> = (args) => <ArticleListItem {...args} />;
+
+export const BIG = Template.bind({});
+BIG.args = {
+  article,
+  view: ArticleView.BIG
 };
 
-export const Light = Template.bind({});
-Light.args = {};
-Light.decorators = [ThemeDecorator(Theme.LIGHT)];
-
-export const Dark = Template.bind({});
-Dark.args = {};
-Dark.decorators = [ThemeDecorator(Theme.DARK)];
+export const SMALL = Template.bind({});
+SMALL.args = {
+  article,
+  view: ArticleView.SMALL
+};

@@ -11,11 +11,13 @@ import {
 import { FC, memo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { RoutePath } from 'shared/config/routeConfig/routeConfig';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { DynamicModuleLoader, ReducersList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import useInitialEffect from 'shared/lib/hooks/useInitialEffect/useInitialEffect';
+import { Button, ButtonTheme } from 'shared/ui/Button/Button';
 import { Text } from 'shared/ui/Text/Text';
 import styles from './ArticleDetailsPage.module.scss';
 
@@ -35,6 +37,8 @@ const ArticleDetailsPage: FC<ArticleDetailsPageProps> = ({ className }) => {
 
   const { t } = useTranslation();
 
+  const navigate = useNavigate();
+
   useInitialEffect(() => {
     dispatch(getCommentsByArticleId(id));
   });
@@ -46,6 +50,10 @@ const ArticleDetailsPage: FC<ArticleDetailsPageProps> = ({ className }) => {
     [dispatch]
   );
 
+  const onBackToList = useCallback(() => {
+    navigate(RoutePath.article_details);
+  }, [navigate]);
+
   if (!id) {
     return <div className={classNames('', {}, [className])}>{t('Статья не найдена')}</div>;
   }
@@ -53,6 +61,9 @@ const ArticleDetailsPage: FC<ArticleDetailsPageProps> = ({ className }) => {
   return (
     <DynamicModuleLoader reducers={initialReducers} removeAfterUnmount>
       <div className={classNames(styles.articleDetailsPage, {}, [className])}>
+        <Button theme={ButtonTheme.OUTLINE} onClick={onBackToList}>
+          {t('Назад к списку')}
+        </Button>
         <ArticleDetails id={id} />
         <Text title={t('Комментарии')} className={styles.commentsTitle} />
         <AddCommentForm onSendComment={onSendComment} />

@@ -1,0 +1,104 @@
+.ArticleListItem {
+
+}
+
+.BIG {
+    .views {
+        margin-left: auto;
+    }
+
+    .header {
+        display: flex;
+        align-items: center;
+    }
+
+    .username {
+        margin-left: 8px;
+    }
+
+    .date {
+        margin-left: auto;
+    }
+
+    .title {
+        margin-top: 8px;
+    }
+
+    .img {
+        width: 100%;
+        max-height: 250px;
+        object-fit: cover;
+        margin-top: 10px;
+    }
+
+    .footer {
+        display: flex;
+        align-items: center;
+        margin-top: 16px;
+    }
+
+    .textBlock {
+        max-height: 200px;
+        overflow-y: hidden;
+    }
+}
+
+.SMALL {
+    width: 230px;
+    transition: ease 200ms; 
+    cursor: pointer;
+    
+    .imgWrapper {
+        width: 200px;
+        height: 200px;
+        position: relative;
+    }
+    
+    .img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .date {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    
+    &:hover {
+        opacity: 0.8;
+        transform: scale(1.01);
+
+        .date {
+            display: block;
+        }
+    }
+
+
+    .infoWrapper {
+        margin-top: 8px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .types p {
+        width: 100px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .views {
+        margin-left: auto;
+        margin-right: 8px;
+    }
+    
+    .title p {
+        width: 200px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
