@@ -1,7 +1,3 @@
-import { Dispatch } from '@reduxjs/toolkit';
-import { StateSchema } from '../../../../../app/providers/StoreProvider';
-import axios from 'axios';
-import { userActions } from '../../../../User';
 import { updateProfileData } from './updateProfileData';
 import { TestAsyncThunk } from '../../../../../shared/lib/tests/TestAsyncThunk/TestAsyncThunk';
 import { Country } from 'entities/Country';
@@ -9,6 +5,7 @@ import { Currency } from 'entities/Currency';
 import { ValidateProfileError } from '../../types/profile';
 
 const data = {
+  id: '1',
   age: 19,
   avatar: '',
   city: 'Moscow',

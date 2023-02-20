@@ -23,7 +23,7 @@ describe('fetchProfileData', () => {
     const thunk = new TestAsyncThunk(fetchProfileData);
     thunk.api.get.mockReturnValue(Promise.resolve({ data: data }));
 
-    const result = await thunk.callThunk();
+    const result = await thunk.callThunk('1');
 
     // eslint-disable-next-line @typescript-eslint/unbound-method
     expect(thunk.api.get).toHaveBeenCalled();
@@ -34,7 +34,7 @@ describe('fetchProfileData', () => {
   test('error get profile data', async () => {
     const thunk = new TestAsyncThunk(fetchProfileData);
     thunk.api.get.mockReturnValue(Promise.resolve({ status: 403 }));
-    const result = await thunk.callThunk();
+    const result = await thunk.callThunk('1');
 
     // eslint-disable-next-line @typescript-eslint/unbound-method
     expect(thunk.api.get).toHaveBeenCalled();

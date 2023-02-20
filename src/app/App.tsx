@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUserInited, userActions } from 'entities/User';
 
 const App = () => {
-  const { theme } = useTheme();
   const dispatch = useDispatch();
   const inited = useSelector(getUserInited);
 

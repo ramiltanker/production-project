@@ -10,7 +10,7 @@ const initialState: LoginSchema = {
 };
 
 export const loginSlice = createSlice({
-  name: 'user',
+  name: 'login',
   initialState,
   reducers: {
     setUsername: (state, actions: PayloadAction<string>) => {

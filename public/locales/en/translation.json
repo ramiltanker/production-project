@@ -5,6 +5,7 @@
   "Показать": "Show",
   "Про": "Про",
   "Пробросить ошибку": "Throw Error",
+  "Профиль": "Profile",
   "Произошла непредвиденная ошибка": "An unexpected error has occurred",
   "Страница не найдена": "Page is not found",
   "Язык": "English",
@@ -18,5 +19,13 @@
   "Выйти": "Log out",
   "Отменить": "Cancel",
   "Сохранить": "Save",
-  "Валюта": "Currency"
+  "Статьи": "Articles",
+  "Статья не найдена": "Article is not found",
+  "Валюта": "Currency",
+  "Произошла ошибка при загрузке статьи": "An error occurred while loading the article",
+  "Копировать": "Copy",
+  "Комментарии": "Comments",
+  "Комментарии отсутствуют": "Comments is missing",
+  "Введите текст комментария": "Enter your comment",
+  "Отправить": "Send"
 }
