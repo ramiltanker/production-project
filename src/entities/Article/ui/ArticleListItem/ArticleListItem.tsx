@@ -71,7 +71,6 @@ const ArticleListItem: FC<ArticleListItemProps> = ({ className, article, view })
           <div className={styles.infoWrapper}>
             {types}
             {views}
-            <Icon SVG={EyeIcon} />
           </div>
           <Text text={article.title} className={styles.title} />
         </Card>

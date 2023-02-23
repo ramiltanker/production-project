@@ -23,13 +23,10 @@ const ArticleList: FC<ArticleListProps> = ({ className, articles, isLoading, vie
     return <ArticleListItem article={article} view={view} className={styles.card} key={article.id} />;
   };
 
-  if (isLoading) {
-    return <div className={classNames(styles.ArticleList, {}, [className, styles[view]])}>{getSkeletons(view)}</div>;
-  }
-
   return (
     <div className={classNames(styles.ArticleList, {}, [className, styles[view]])}>
       {articles.length > 0 ? articles.map(renderArticle) : null}
+      {isLoading && getSkeletons(view)}
     </div>
   );
 };

@@ -8,11 +8,7 @@ const AppRouter = memo(() => {
   const renderWithWrapper = useCallback((route: AppRoutesProps) => {
     const { path, element, authOnly } = route;
 
-    const jsxElement = (
-      <Suspense fallback={<PageLoader />}>
-        <div className="page-wrapper">{element}</div>
-      </Suspense>
-    );
+    const jsxElement = <Suspense fallback={<PageLoader />}>{element}</Suspense>;
     return <Route key={path} path={path} element={authOnly ? <RequireAuth>{jsxElement}</RequireAuth> : jsxElement} />;
   }, []);
 

@@ -24,6 +24,7 @@ import { useTranslation } from 'react-i18next';
 import { ValidateProfileError } from 'entities/Profile/model/types/profile';
 import useInitialEffect from 'shared/lib/hooks/useInitialEffect/useInitialEffect';
 import { useParams } from 'react-router-dom';
+import { Page } from 'shared/ui/Page/Page';
 
 interface ProfilePageProps {
   className?: string;
@@ -44,8 +45,6 @@ const ProfilePage: FC<ProfilePageProps> = ({ className }) => {
   const readonly = useSelector(getProfileReadonly);
   const validateErrors = useSelector(getProfileValidateErrors);
   const { id } = useParams<{ id: string }>();
-
-  console.log(validateErrors);
 
   const validateErrorsTranslates = {
     [ValidateProfileError.SERVER_ERROR]: t('Серверная ошибка при сохранении'),
@@ -119,7 +118,7 @@ const ProfilePage: FC<ProfilePageProps> = ({ className }) => {
 
   return (
     <DynamicModuleLoader reducers={initialReducers} removeAfterUnmount>
-      <div className={classNames('')}>
+      <Page className={classNames('')}>
         <ProfilePageHeader />
         {validateErrors?.length &&
           validateErrors.map((error) => {
@@ -139,7 +138,7 @@ const ProfilePage: FC<ProfilePageProps> = ({ className }) => {
           onChangeCurrency={onChangeCurrency}
           onChangeCountry={onChangeCountry}
         />
-      </div>
+      </Page>
     </DynamicModuleLoader>
   );
 };
