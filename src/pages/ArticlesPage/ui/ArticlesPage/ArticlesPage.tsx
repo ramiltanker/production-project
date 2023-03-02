@@ -2,15 +2,9 @@
 import { ArticleList } from 'entities/Article';
 import { ArticleView } from 'entities/Article/model/types/article';
 import { ArticleViewSelector } from 'features/ArticleViewSelector';
-import {
-  getArticlesPageError,
-  getArticlesPageHasMore,
-  getArticlesPageLoading,
-  getArticlesPagePage,
-  getArticlesPageView
-} from 'pages/ArticlesPage/model/selectors/articlesPageSelectors';
-import { fetchArticlesList } from 'pages/ArticlesPage/model/services/fetchArticlesList/fetchArticlesList';
+import { getArticlesPageLoading, getArticlesPageView } from 'pages/ArticlesPage/model/selectors/articlesPageSelectors';
 import { fetchNextArticlesPage } from 'pages/ArticlesPage/model/services/fetchNextArticlesPage/fetchNextArticlesPage';
+import { initArticlesPage } from 'pages/ArticlesPage/model/services/initArticlesPage/initArticlesPage';
 import {
   articlesPageActions,
   articlesPageReducer,
@@ -38,14 +32,10 @@ const ArticlesPage: FC<ArticlesPageProps> = ({ className }) => {
 
   const articles = useSelector(getArticles.selectAll);
   const isLoading = useSelector(getArticlesPageLoading);
-  const error = useSelector(getArticlesPageError);
   const view = useSelector(getArticlesPageView);
-  const page = useSelector(getArticlesPagePage);
-  const hasMore = useSelector(getArticlesPageHasMore);
 
   useInitialEffect(() => {
-    dispatch(articlesPageActions.initState());
-    dispatch(fetchArticlesList({ page: 1 }));
+    dispatch(initArticlesPage());
   });
 
   const onChangeView = useCallback(
@@ -60,7 +50,7 @@ const ArticlesPage: FC<ArticlesPageProps> = ({ className }) => {
   }, [dispatch]);
 
   return (
-    <DynamicModuleLoader reducers={initialReducers} removeAfterUnmount>
+    <DynamicModuleLoader reducers={initialReducers} removeAfterUnmount={false}>
       <Page className={classNames(styles.articlesPage, {}, [className])} onScrollEnd={onLoadNextPart}>
         <ArticleViewSelector onViewClick={onChangeView} view={view} />
         <ArticleList view={view} isLoading={isLoading} articles={articles} />

@@ -7,11 +7,7 @@ import { $api } from 'shared/api/api';
 import { To, NavigateOptions } from 'react-router-dom';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function createReduxStore(
-  initialState?: StateSchema,
-  asyncReducers?: ReducersMapObject<StateSchema>,
-  navigate?: (to: To, options?: NavigateOptions) => void
-) {
+export function createReduxStore(initialState?: StateSchema, asyncReducers?: ReducersMapObject<StateSchema>) {
   const rootReducer: ReducersMapObject<StateSchema> = {
     ...asyncReducers,
     counter: counterReducer,
@@ -28,8 +24,7 @@ export function createReduxStore(
       getDefaultMiddleware({
         thunk: {
           extraArgument: {
-            api: $api,
-            navigate: navigate
+            api: $api
           }
         }
       })
