@@ -5,13 +5,15 @@ import { userReducer } from '../../../../entities/User';
 import { createReducerManager } from './reducerManager';
 import { $api } from 'shared/api/api';
 import { To, NavigateOptions } from 'react-router-dom';
+import { scrollSaveReducer } from 'features/ScrollSave';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function createReduxStore(initialState?: StateSchema, asyncReducers?: ReducersMapObject<StateSchema>) {
   const rootReducer: ReducersMapObject<StateSchema> = {
     ...asyncReducers,
     counter: counterReducer,
-    user: userReducer
+    user: userReducer,
+    scrollSave: scrollSaveReducer
   };
 
   const reducerManager = createReducerManager(rootReducer);
