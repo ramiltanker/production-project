@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, HTMLAttributeAnchorTarget, memo } from 'react';
 import styles from './ArticleList.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { Article, ArticleView } from '../../model/types/article';
@@ -12,6 +12,7 @@ interface ArticleListProps {
   articles: Article[];
   isLoading?: boolean;
   view?: ArticleView;
+  target?: HTMLAttributeAnchorTarget;
 }
 
 const getSkeletons = (view: ArticleView) => {
@@ -20,11 +21,13 @@ const getSkeletons = (view: ArticleView) => {
     .map((item, index) => <ArticleListItemSkeleton view={view} key={index} className={styles.card} />);
 };
 
-const ArticleList: FC<ArticleListProps> = ({ className, articles, isLoading, view = ArticleView.SMALL }) => {
+const ArticleList: FC<ArticleListProps> = memo((props: ArticleListProps) => {
+  const { className, articles, isLoading, view = ArticleView.SMALL, target } = props;
+
   const { t } = useTranslation();
 
   const renderArticle = (article: Article) => {
-    return <ArticleListItem article={article} view={view} className={styles.card} key={article.id} />;
+    return <ArticleListItem article={article} view={view} className={styles.card} key={article.id} target={target} />;
   };
 
   if (!isLoading && !articles.length) {
@@ -41,6 +44,6 @@ const ArticleList: FC<ArticleListProps> = ({ className, articles, isLoading, vie
       {isLoading && getSkeletons(view)}
     </div>
   );
-};
+});
 
 export { ArticleList };

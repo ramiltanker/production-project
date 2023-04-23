@@ -30,6 +30,7 @@ const ArticleViewSelector: FC<ArticleViewSelectorProps> = ({ className, view, on
       onViewClick(newView);
     };
   };
+
   return (
     <div className={classNames(styles.ArticleViewSelector, {}, [className])}>
       {viewTypes.map((viewType) => {
