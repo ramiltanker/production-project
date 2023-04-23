@@ -8,6 +8,8 @@ import { Modal } from 'shared/ui/Modal/Modal';
 import { LoginModal } from 'features/AuthByUsername';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserAuthData, userActions } from 'entities/User';
+import { Text, TextTheme } from 'shared/ui/Text/Text';
+import { RoutePath } from 'shared/config/routeConfig/routeConfig';
 
 interface NavbarProps {}
 
@@ -32,6 +34,10 @@ const Navbar: FC<NavbarProps> = memo(() => {
   if (userAuthData) {
     return (
       <header className={classNames(styles.navbar)}>
+        <Text className={styles.appName} title={t('Рамиль Ашрафулин')} theme={TextTheme.PRIMARY_INVERTED} />
+        <AppLink to={RoutePath.article_create} theme={AppLinkTheme.PRIMARY_INVERTED} className={styles.createLink}>
+          {t('Создать статью')}
+        </AppLink>
         <Button theme={ButtonTheme.CLEAR_INVERTED} className={classNames(styles.links)} onClick={handleLogOut}>
           {t('Выйти')}
         </Button>
