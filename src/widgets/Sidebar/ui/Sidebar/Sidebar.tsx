@@ -1,4 +1,4 @@
-import { FC, memo, useState } from 'react';
+import { memo, useState } from 'react';
 import styles from './Sidebar.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { ThemeSwitcher } from 'widgets/ThemeSwitcher';
@@ -7,6 +7,7 @@ import { Button, ButtonSize, ButtonTheme } from 'shared/ui/Button/Button';
 import { SidebarItem } from '../SidebarItem/SidebarItem';
 import { useSelector } from 'react-redux';
 import { getSidebarItems } from '../../model/selector/getSidebarItems';
+import { VStack } from 'shared/Stack/VStack/VStack';
 
 interface SidebarProps {
   className?: string;
@@ -33,11 +34,11 @@ const Sidebar = memo(({ className = '' }: SidebarProps) => {
       >
         {collapsed ? '>' : '<'}
       </Button>
-      <div className={styles.items}>
+      <VStack gap="8" className={styles.items}>
         {sidebarItemsList.map((item) => {
           return <SidebarItem item={item} key={item.path} collapsed={collapsed} />;
         })}
-      </div>
+      </VStack>
       <div className={styles.switchers}>
         <ThemeSwitcher />
         <LangSwitcher className={styles.langSwitcher} short={collapsed} />

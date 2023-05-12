@@ -1,15 +1,9 @@
 /* eslint-disable max-len */
 import { ArticleList } from 'entities/Article';
-import { ArticleView } from 'entities/Article/model/types/article';
-import { ArticleViewSelector } from 'features/ArticleViewSelector';
 import { getArticlesPageLoading, getArticlesPageView } from 'pages/ArticlesPage/model/selectors/articlesPageSelectors';
 import { fetchNextArticlesPage } from 'pages/ArticlesPage/model/services/fetchNextArticlesPage/fetchNextArticlesPage';
 import { initArticlesPage } from 'pages/ArticlesPage/model/services/initArticlesPage/initArticlesPage';
-import {
-  articlesPageActions,
-  articlesPageReducer,
-  getArticles
-} from 'pages/ArticlesPage/model/slices/articlePageSlice';
+import { articlesPageReducer, getArticles } from 'pages/ArticlesPage/model/slices/articlePageSlice';
 import { FC, memo, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
@@ -46,10 +40,12 @@ const ArticlesPage: FC<ArticlesPageProps> = ({ className }) => {
 
   return (
     <DynamicModuleLoader reducers={initialReducers} removeAfterUnmount={false}>
-      <Page className={classNames(styles.articlesPage, {}, [className])} onScrollEnd={onLoadNextPart}>
+      {/* <Page className={classNames(styles.articlesPage, {}, [className])} onScrollEnd={onLoadNextPart}> */}
+      <div className={styles.wrapper}>
         <ArticlesPageFilters />
         <ArticleList view={view} isLoading={isLoading} articles={articles} className={styles.list} />
-      </Page>
+      </div>
+      {/* </Page> */}
     </DynamicModuleLoader>
   );
 };

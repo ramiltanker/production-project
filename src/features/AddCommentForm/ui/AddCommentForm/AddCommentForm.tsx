@@ -6,9 +6,10 @@ import { useTranslation } from 'react-i18next';
 import { Button, ButtonTheme } from 'shared/ui/Button/Button';
 import { DynamicModuleLoader, ReducersList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { useSelector } from 'react-redux';
-import { getAddCommentFormError, getAddCommentFormText } from '../../model/selectors/addCommentFormSelectors';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { getAddCommentFormError, getAddCommentFormText } from '../../model/selectors/addCommentFormSelectors';
 import { addCommentFromActions, addCommentFromReducer } from '../../model/slice/addCommentForm';
+import { HStack } from 'shared/Stack';
 
 interface AddCommentFormProps {
   className?: string;
@@ -20,7 +21,6 @@ const initialReducers: ReducersList = {
 };
 
 const AddCommentForm: FC<AddCommentFormProps> = ({ className, onSendComment }) => {
-  const error = useSelector(getAddCommentFormError);
   const text = useSelector(getAddCommentFormText);
   const dispatch = useAppDispatch();
 
@@ -40,7 +40,7 @@ const AddCommentForm: FC<AddCommentFormProps> = ({ className, onSendComment }) =
 
   return (
     <DynamicModuleLoader reducers={initialReducers} removeAfterUnmount>
-      <div className={classNames(styles.addCommentForm, {}, [className])}>
+      <HStack justify="space-between" align='center' max className={classNames(styles.addCommentForm, {}, [className])}>
         <Input
           className={styles.input}
           placeholder={t('Введите текст комментария')}
@@ -50,7 +50,7 @@ const AddCommentForm: FC<AddCommentFormProps> = ({ className, onSendComment }) =
         <Button theme={ButtonTheme.OUTLINE} onClick={onSendHandler}>
           {t('Отправить')}
         </Button>
-      </div>
+      </HStack>
     </DynamicModuleLoader>
   );
 };

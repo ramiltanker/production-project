@@ -21,10 +21,11 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module'
   },
-  plugins: ['react', 'react-hooks', '@typescript-eslint', 'i18next'],
+  plugins: ['react', 'react-hooks', '@typescript-eslint', 'i18next', 'ramil-custom-path-checker'],
   rules: {
     'react/jsx-indent': [2, 2],
     'react/jsx-indent-props': [2, 2],
+    'ramil-custom-path-checker/path-checker': 'error',
     indent: 'off',
     semi: 'off',
     '@typescript-eslint/semi': [2, 'always'],

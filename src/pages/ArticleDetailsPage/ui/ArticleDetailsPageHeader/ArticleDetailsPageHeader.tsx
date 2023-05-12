@@ -1,14 +1,13 @@
 import { FC, useCallback } from 'react';
-import styles from './ArticleDetailsPageHeader.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { useNavigate } from 'react-router-dom';
 import { RoutePath } from 'shared/config/routeConfig/routeConfig';
 import { Button, ButtonTheme } from 'shared/ui/Button/Button';
 import { useTranslation } from 'react-i18next';
 import { getArticleDetailsData } from 'entities/Article';
-import { getUserAuthData } from 'entities/User';
 import { getCanEditArticle } from '../../model/selectors/article';
 import { useSelector } from 'react-redux';
+import { HStack } from 'shared/Stack';
 
 interface ArticleDetailsPageHeaderProps {
   className?: string;
@@ -19,7 +18,6 @@ const ArticleDetailsPageHeader: FC<ArticleDetailsPageHeaderProps> = ({ className
 
   const { t } = useTranslation();
 
-  const userData = useSelector(getUserAuthData);
   const article = useSelector(getArticleDetailsData);
   const canEdit = useSelector(getCanEditArticle);
 
@@ -34,16 +32,16 @@ const ArticleDetailsPageHeader: FC<ArticleDetailsPageHeaderProps> = ({ className
   }, [article?.id, navigate]);
 
   return (
-    <div className={classNames(styles.ArticleDetailsPageHeader, {}, [className])}>
+    <HStack justify="space-between" max className={classNames('', {}, [className])}>
       <Button theme={ButtonTheme.OUTLINE} onClick={onBackToList}>
         {t('Назад к списку')}
       </Button>
       {canEdit && (
-        <Button className={styles.editBtn} theme={ButtonTheme.OUTLINE} onClick={onEditArticle}>
+        <Button theme={ButtonTheme.OUTLINE} onClick={onEditArticle}>
           {t('Редактировать')}
         </Button>
       )}
-    </div>
+    </HStack>
   );
 };
 

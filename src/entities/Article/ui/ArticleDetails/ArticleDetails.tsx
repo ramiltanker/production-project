@@ -1,4 +1,4 @@
-import { FC, useEffect, memo, useCallback } from 'react';
+import { memo, useCallback } from 'react';
 import styles from './ArticleDetails.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { DynamicModuleLoader, ReducersList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
@@ -18,11 +18,12 @@ import { Avatar } from 'shared/ui/Avatar/Avatar';
 import ViewsLogo from 'shared/assets/icons/views.svg';
 import DateLogo from 'shared/assets/icons/date.svg';
 import { Icon } from 'shared/ui/Icon/Icon';
-import { ArticleBlock, ArticleBlockType } from 'entities/Article/model/types/article';
+import { ArticleBlock, ArticleBlockType } from '../../model/types/article';
 import { ArticleCodeBlockComponent } from '../ArticleCodeBlockComponent/ArticleCodeBlockComponent';
 import { ArticleImageBlockComponent } from '../ArticleImageBlockComponent/ArticleImageBlockComponent';
 import { ArticleTextBlockComponent } from '../ArticleTextBlockComponent/ArticleTextBlockComponent';
 import useInitialEffect from 'shared/lib/hooks/useInitialEffect/useInitialEffect';
+import { HStack, VStack } from 'shared/Stack';
 
 interface ArticleDetailsProps {
   className?: string;
@@ -76,21 +77,23 @@ const ArticleDetails = memo(({ className, id }: ArticleDetailsProps) => {
     content = <Text align={TextAlign.CENTER} title={t('Произошла ошибка при загрузке статьи')}></Text>;
   } else {
     content = (
-      <div className={classNames(styles.articleDetails, {}, [className])}>
-        <div className={styles.avatarWrapper}>
+      <VStack gap="16" className={classNames(styles.articleDetails, {}, [className])}>
+        <HStack justify="center" max>
           <Avatar size={200} src={data?.img} className={styles.avatar} />
-        </div>
-        <Text className={styles.title} title={data?.title} text={data?.subtitle} size={TextSize.SIZE_L} />
-        <div className={styles.articleInfo}>
-          <Icon SVG={ViewsLogo} className={styles.icon} />
-          <Text text={data?.views} />
-        </div>
-        <div className={styles.articleInfo}>
-          <Icon SVG={DateLogo} className={styles.icon} />
-          <Text text={data?.createdAt} />
-        </div>
+        </HStack>
+        <VStack gap="4" max>
+          <Text className={styles.title} title={data?.title} text={data?.subtitle} size={TextSize.SIZE_L} />
+          <HStack gap="8" align='center'>
+            <Icon SVG={ViewsLogo} className={styles.icon} />
+            <Text text={data?.views} />
+          </HStack>
+          <HStack gap="8" align='center'>
+            <Icon SVG={DateLogo} className={styles.icon} />
+            <Text text={data?.createdAt} />
+          </HStack>
+        </VStack>
         {data?.blocks.map(renderBlock)}
-      </div>
+      </VStack>
     );
   }
 

@@ -1,13 +1,12 @@
 import { FC, useCallback } from 'react';
-import styles from './ProfilePageHeader.module.scss';
-import { classNames } from 'shared/lib/classNames/classNames';
 import { Button, ButtonTheme } from 'shared/ui/Button/Button';
 import { useTranslation } from 'react-i18next';
-import { Text, TextTheme } from 'shared/ui/Text/Text';
+import { Text } from 'shared/ui/Text/Text';
 import { getProfileData, getProfileReadonly, profileActions, updateProfileData } from 'entities/Profile';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { getUserAuthData } from 'entities/User';
+import { HStack } from 'shared/Stack/HStack/HStack';
 
 interface ProfilePageHeaderProps {
   className?: string;
@@ -34,29 +33,29 @@ const ProfilePageHeader: FC<ProfilePageHeaderProps> = ({ className }) => {
   }, [dispatch]);
 
   return (
-    <div className={styles.header}>
+    <HStack justify='space-between' max>
       <Text title={t('Профиль')} />
       {canEdit && (
         <>
           {readonly
             ? (
-              <Button className={styles.editBtn} theme={ButtonTheme.OUTLINE} onClick={onEdit}>
+              <Button theme={ButtonTheme.OUTLINE} onClick={onEdit}>
                 {t('Редактировать')}
               </Button>
               )
             : (
-              <div className={styles.buttons}>
-                <Button className={styles.editBtn} theme={ButtonTheme.OUTLINE_RED} onClick={onCancelEdit}>
+              <HStack gap='8'>
+                <Button theme={ButtonTheme.OUTLINE_RED} onClick={onCancelEdit}>
                   {t('Отменить')}
                 </Button>
-                <Button className={styles.editBtn} theme={ButtonTheme.OUTLINE} onClick={onSave}>
+                <Button theme={ButtonTheme.OUTLINE} onClick={onSave}>
                   {t('Сохранить')}
                 </Button>
-              </div>
+              </HStack>
               )}
         </>
       )}
-    </div>
+    </HStack>
   );
 };
 

@@ -10,3 +10,19 @@
     flex-wrap: wrap;
     gap: 30px;
 }
+
+.itemsWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+
+
+    @media (max-width: 1024px) {
+        width: 50%;
+    }
+    
+    @media (max-width: 300px) {
+        width: 100%;
+    }
+}

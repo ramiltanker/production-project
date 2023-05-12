@@ -1,13 +1,13 @@
 import { memo } from 'react';
 import styles from './CommentCard.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
-import { Comment } from 'entities/Comment/model/types/comment';
+import { Comment } from '../../model/types/comment';
 import { Avatar } from 'shared/ui/Avatar/Avatar';
 import { Text } from 'shared/ui/Text/Text';
 import { Skeleton } from 'shared/ui/Skeleton/Skeleton';
 import { AppLink } from 'shared/ui/AppLink/AppLink';
-import { Route } from 'react-router-dom';
 import { RoutePath } from 'shared/config/routeConfig/routeConfig';
+import { VStack } from 'shared/Stack';
 
 interface CommentCardProps {
   className?: string;
@@ -18,13 +18,13 @@ interface CommentCardProps {
 const CommentCard = memo(({ className, comment, isLoading }: CommentCardProps) => {
   if (isLoading) {
     return (
-      <div className={classNames(styles.commentCard, {}, [className])}>
+      <VStack gap='8' max className={classNames(styles.commentCard, {}, [className])}>
         <div className={styles.header}>
           <Skeleton width={30} height={30} border="50%" />
           <Skeleton className={styles.username} height={16} width={100} />
         </div>
         <Skeleton className={styles.text} height={50} width="100%" />
-      </div>
+      </VStack>
     );
   }
 
@@ -33,13 +33,13 @@ const CommentCard = memo(({ className, comment, isLoading }: CommentCardProps) =
   }
 
   return (
-    <div className={classNames(styles.commentCard, {}, [className])}>
+    <VStack gap="8" max className={classNames(styles.commentCard, {}, [className])}>
       <AppLink className={styles.header} to={`${RoutePath.profile}${comment.user.id}`}>
         {comment.user.avatar && <Avatar size={30} src={comment.user.avatar} />}
         <Text className={styles.username} title={comment.user.username} />
       </AppLink>
       <Text className={styles.text} text={comment.text} />
-    </div>
+    </VStack>
   );
 });
 

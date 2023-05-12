@@ -25,6 +25,7 @@ import { ValidateProfileError } from 'entities/Profile/model/types/profile';
 import useInitialEffect from 'shared/lib/hooks/useInitialEffect/useInitialEffect';
 import { useParams } from 'react-router-dom';
 import { Page } from 'widgets/Page/Page';
+import { VStack } from 'shared/Stack/VStack/VStack';
 
 interface ProfilePageProps {
   className?: string;
@@ -119,25 +120,27 @@ const ProfilePage: FC<ProfilePageProps> = ({ className }) => {
   return (
     <DynamicModuleLoader reducers={initialReducers} removeAfterUnmount>
       <Page className={classNames('')}>
-        <ProfilePageHeader />
-        {validateErrors?.length &&
-          validateErrors.map((error) => {
-            return <Text theme={TextTheme.ERROR} text={validateErrorsTranslates[error]} key={error} />;
-          })}
-        <ProfileCard
-          data={form}
-          isLoading={isLoading}
-          error={error}
-          readonly={readonly}
-          onChangeFirstname={onChangeFirstname}
-          onChangeLastname={onChangeLastname}
-          onChangeCity={onChangeCity}
-          onChangeAge={onChangeAge}
-          onChangeAvatar={onChangeAvatar}
-          onChangeUsername={onChangeUsername}
-          onChangeCurrency={onChangeCurrency}
-          onChangeCountry={onChangeCountry}
-        />
+        <VStack gap="16" max>
+          <ProfilePageHeader />
+          {validateErrors?.length &&
+            validateErrors.map((error) => {
+              return <Text theme={TextTheme.ERROR} text={validateErrorsTranslates[error]} key={error} />;
+            })}
+          <ProfileCard
+            data={form}
+            isLoading={isLoading}
+            error={error}
+            readonly={readonly}
+            onChangeFirstname={onChangeFirstname}
+            onChangeLastname={onChangeLastname}
+            onChangeCity={onChangeCity}
+            onChangeAge={onChangeAge}
+            onChangeAvatar={onChangeAvatar}
+            onChangeUsername={onChangeUsername}
+            onChangeCurrency={onChangeCurrency}
+            onChangeCountry={onChangeCountry}
+          />
+        </VStack>
       </Page>
     </DynamicModuleLoader>
   );
