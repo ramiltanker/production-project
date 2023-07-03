@@ -11,7 +11,7 @@ import { getAddCommentFormError, getAddCommentFormText } from '../../model/selec
 import { addCommentFromActions, addCommentFromReducer } from '../../model/slice/addCommentForm';
 import { HStack } from 'shared/Stack';
 
-interface AddCommentFormProps {
+export interface AddCommentFormProps {
   className?: string;
   onSendComment: (text: string) => void;
 }
@@ -40,7 +40,7 @@ const AddCommentForm: FC<AddCommentFormProps> = ({ className, onSendComment }) =
 
   return (
     <DynamicModuleLoader reducers={initialReducers} removeAfterUnmount>
-      <HStack justify="space-between" align='center' max className={classNames(styles.addCommentForm, {}, [className])}>
+      <HStack justify="space-between" align="center" max className={classNames(styles.addCommentForm, {}, [className])}>
         <Input
           className={styles.input}
           placeholder={t('Введите текст комментария')}
